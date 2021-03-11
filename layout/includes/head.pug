@@ -75,3 +75,7 @@ include ./head/noscript.pug
 !=fragment_cache('injectHeadJs', function(){return inject_head_js()})
 
 !=fragment_cache('injectHead', function(){return injectHtml(theme.inject.head)})
+
+//- Google Fonts (by shundroid)
+link(rel="preconnect" href="https://fonts.gstatic.com")
+link(href="https://fonts.googleapis.com/css2?family=Shippori+Mincho&display=swap" rel="stylesheet")
