@@ -5,6 +5,7 @@
 - else if (is_month()) pageTitle += ': ' + page.month + '/' + page.year
 - else if (is_year()) pageTitle += ': ' + page.year
 - else if (is_current('/404.html', [strict])) pageTitle = _p('error404.error_title')
+- else if (page.author) pageTitle = "Author: " + page.author.name
 - else pageTitle = page.title || config.title || ''
 
 - var isSubtitle = config.subtitle ? ' - ' + config.subtitle : ''
