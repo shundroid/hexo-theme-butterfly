@@ -2,29 +2,41 @@
   function is_home() {
     return page.source === 'index.html'
   }
+  function is_author() {
+    return typeof page.author !== "undefined"
+  }
 
 if !theme.disable_top_img && page.top_img !== false
   if is_home()
     - var top_img = theme.index_img !== false ? theme.index_img || theme.default_top_img : false
+    - var site_title = config.title
   else if is_post()
     - var top_img = page.top_img || page.cover || page.randomcover
+    - var site_title = page.title || config.title
   else if is_page()
     - var top_img = page.top_img || theme.default_top_img
+    - var site_title = page.title || config.title
   else if is_tag()
     - var top_img = theme.tag_per_img && theme.tag_per_img[page.tag] 
     - top_img = top_img ? top_img : (theme.tag_img !== false ? theme.tag_img || theme.default_top_img : false)
+    - var site_title = "Tag: " + page.tag
   else if is_category()
     - var top_img = theme.category_per_img && theme.category_per_img[page.category]
     - top_img = top_img ? top_img : (theme.category_img !== false ? theme.category_img || theme.default_top_img : false)
+    - var site_title = "Category: " + page.category
   else if is_archive()
     - var top_img = theme.archive_img !== false ? theme.archive_img || theme.default_top_img : false
+    - var site_title = _p("page.archives") || config.title
+  else if is_author()
+    - var top_img = page.top_img || theme.default_top_img
+    - var site_title = "Author: " + page.author.name
   else
     - var top_img = page.top_img || theme.default_top_img
+    - var site_title = config.title
 
   if top_img !== false
     - var imgSource = top_img && top_img.indexOf('/') !== -1 ? `background-image: url('${url_for(top_img)}')` : `background: ${top_img}`
     - var bg_img = top_img ? imgSource : ''
-    - var site_title = is_archive() ? _p('page.archives') : page.title || page.tag || page.category || config.title
     - var isHomeClass = is_home() ? 'full_page' : 'not-home-page'
     - is_post() ? isHomeClass = 'post-bg' : isHomeClass
   else

@@ -35,6 +35,11 @@
             a(href=url_for(item.path)).post-meta-categories #[=item.name]
             if (index < page.categories.data.length - 1)
               i.fas.fa-angle-right.post-meta-separator
+      if (page.author)
+        span.post-meta-author
+          span.post-meta-separator |
+          i.fas.fa-user-edit.fa-fw.post-meta-icon
+          a(href="/author/" + page.author.id + "/").post-meta-author=page.author.name
 
     .meta-secondline
       - let postWordcount = theme.wordcount.enable && (theme.wordcount.post_wordcount || theme.wordcount.min2read)
